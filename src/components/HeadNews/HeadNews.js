@@ -14,7 +14,7 @@ async function getArticles({ country, theme, pageSize, page }) {
   try {
     const response = await axios.get("https://newsapi.org/v2/top-headlines", {
       params: {
-        apiKey: "08537a557cb8430d9b567a544423fab6",
+        apiKey: "8e275467c90449ea816a98a90f711797",
         q: `${theme}`,
         pageSize: `${pageSize}`,
         country: `${country}`,
@@ -78,15 +78,17 @@ function handlePageNumber(num) {
 
 function renderPageNumber() {
   $("#pagination").innerHTML = "";
-  totalPage = Math.ceil(articles.length / perPage);
-  for (let i = 0; i <= totalPage; i++) {
-    $("#pagination").innerHTML += `<span onclick="handlePageNumber(${i + 1})">${
-      i + 1
+  if(articles.length !== 0) {
+    totalPage = Math.ceil(articles.length / perPage);
+  for (let i = 1; i <= totalPage; i++) {
+    $("#pagination").innerHTML += `<span onclick="handlePageNumber(${i })">${
+      i
     }</span>`;
   }
   $("#pagination")
     .querySelector(`span:nth-child(${currentPage})`)
     .classList.add("active");
+  }
 }
 
 //Render View

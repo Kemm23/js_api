@@ -14,7 +14,7 @@ async function getArticles({ language, theme, pageSize, page }) {
   try {
     const response = await axios.get("https://newsapi.org/v2/everything", {
       params: {
-        apiKey: "08537a557cb8430d9b567a544423fab6",
+        apiKey: "8e275467c90449ea816a98a90f711797",
         q: `${theme}`,
         pageSize: `${pageSize}`,
         language: `${language}`,
