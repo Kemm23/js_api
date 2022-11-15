@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./HeadNews.css">
+    <title>News</title>
+</head>
+<body>
+    <div class="nav mb-5 d-flex justify-content-around align-items-center">
+        <div id="home-link" class="nav-item"><a href="../../../index.html">Home</a></div>
+        <div id="Headlines" class="nav-item"><a href="">Top Headlines</a></div>
+        <div class="nav-item">
+            <select class="mr-5" id="Theme">
+                <option value="" selected disabled>-- Select Theme --</option>
+                <option value="sport">Sport ( default )</option>
+                <option value="business">Business</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="general">General</option>
+                <option value="science">Science</option>
+                <option value="technology">Technology</option>
+            </select>
+            <select id="country">
+                <option value="" selected disabled>-- Select country --</option>
+                <option value="us">United State ( default )</option>
+                <option value="ae">United Arab Emirates</option>
+                <option value="be">Belgium</option>
+                <option value="bg">Bulgaria</option>
+                <option value="hk">Hong Kong</option>
+            </select>
+        </div>
+    </div>
+    <div class="text-center mb-5"><input id="Search" class="pl-2" type="text" placeholder="Search your favorite article..."/></div>
+    <ul id="article-list">
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="./HeadNews.js"></script>
+</body>
+</html>

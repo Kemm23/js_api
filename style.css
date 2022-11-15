@@ -1,0 +1,19 @@
+.font-32{
+    font-size: 32px;
+}
+
+.nav {
+    height: 50px;
+    box-shadow: 0 3px 6px #eee;
+    font-size: 24px;
+}
+
+#Search {
+    min-width: 500px;
+}
+
+#article-list .article-title:hover {
+    cursor: pointer;
+    color: crimson;
+    text-decoration: underline;
+}
