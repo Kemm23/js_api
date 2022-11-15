@@ -2,6 +2,18 @@
     font-size: 32px;
 }
 
+.font-24 {
+    font-size: 24px;
+}
+
+.font-18 {
+    font-size: 18px;
+}
+
+ul {
+    list-style: none;
+}
+
 .nav {
     height: 50px;
     box-shadow: 0 3px 6px #eee;
@@ -9,11 +21,37 @@
 }
 
 #Search {
-    min-width: 500px;
+    min-width: 900px;
+    padding: 8px 0 8px 8px;
+}
+
+#article-list {
+    max-width: 1200px;
+    margin: auto;
 }
 
 #article-list .article-title:hover {
     cursor: pointer;
     color: crimson;
     text-decoration: underline;
+}
+
+#article-list img {
+    width: 96%;
+}
+
+#pagination span {
+    margin: 0 10px;
+    border: 1px solid black;
+    padding: 0 10px;
+    background: #3333331c;
+}
+
+#pagination .active {
+    border-color: red;
+}
+
+#pagination span:hover {
+    cursor: pointer;
+    opacity: 0.6;
 }

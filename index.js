@@ -1,22 +1,24 @@
-var articles = [];
+let articles = [];
 const demand = {
   language: "en",
   theme: "sport",
+  pageSize: null,
+  page: 1,
 };
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 //call API
-async function getArticles({ language, theme }) {
+async function getArticles({ language, theme, pageSize, page }) {
   try {
     const response = await axios.get("https://newsapi.org/v2/everything", {
       params: {
         apiKey: "08537a557cb8430d9b567a544423fab6",
         q: `${theme}`,
-        pageSize: 10,
+        pageSize: `${pageSize}`,
         language: `${language}`,
-        page: 1,
+        page: `${page}`,
       },
     });
     articles = response.data.articles;
@@ -26,11 +28,11 @@ async function getArticles({ language, theme }) {
   }
 }
 
-getArticles(demand).then((data) => {
-  renderArticles(data);
+getArticles(demand).then(() => {
+  renderPageNumber();
+  renderArticles();
 });
-
-//Handle event
+//Handle Event
 $("#Language").onchange = (e) => {
   demand.language = e.target.value;
   reRenderArticles();
@@ -58,13 +60,53 @@ $("#home-link").onclick = (e) => {
   reRenderArticles();
 };
 
-//render View
-function renderArticles(data) {
+//Handle Page Number
+let currentPage = demand.page;
+let perPage = 10;
+let totalPage = 0;
+let perArticle = [];
+
+function handlePageNumber(num) {
+  $("#pagination").querySelector(".active").classList.remove("active");
+  $("#pagination")
+    .querySelector(`span:nth-child(${num})`)
+    .classList.add("active");
+  demand.page = num;
+  currentPage = num;
+  renderArticles();
+}
+
+function renderPageNumber() {
+  $("#pagination").innerHTML = "";
+  totalPage = Math.ceil(articles.length / perPage);
+  for (let i = 1; i <= totalPage; i++) {
+    $(
+      "#pagination"
+    ).innerHTML += `<span onclick="handlePageNumber(${i})">${i}</span>`;
+  }
+  $("#pagination")
+    .querySelector(`span:nth-child(${currentPage})`)
+    .classList.add("active");
+}
+
+//Render View
+function renderArticles() {
+  perArticle = articles.slice(
+    (currentPage - 1) * perPage,
+    (currentPage - 1) * perPage + perPage
+  );
   $("#article-list").innerHTML = "";
-  data.forEach((article, index) => {
-    $("#article-list").innerHTML += `<li>
-                <div class="article-title font-weight-bold font-32px" onclick="showDetail(${index})">${article.title}</div>
-                <div>${article.description}</div>
+  perArticle.forEach((article, index) => {
+    $("#article-list").innerHTML += `<li class="row mb-4">
+                <div class="col-3"><img class="" src="${
+                  article.urlToImage
+                }" /></div>
+                <div class="col-9">
+                    <div class="article-title font-weight-bold font-24" onclick="showDetail(${
+                      (currentPage - 1) * perPage + index
+                    })">${article.title}</div>
+                    <div class="font-18">${article.description}</div>
+                </div>
             </li>`;
   });
 }
@@ -85,7 +127,8 @@ function showDetail(id) {
 }
 
 function reRenderArticles() {
-  getArticles(demand).then((data) => {
-    renderArticles(data);
+  getArticles(demand).then(() => {
+    renderPageNumber();
+    renderArticles();
   });
 }
